@@ -15,6 +15,7 @@ class OnboardingAppState extends State<InicioApp> {
   bool _isLogoSmall = false;
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  //Cambiado de gradientes dependiendo de la pagina
   final List<Gradient> _gradients = [
     const LinearGradient(
       colors: [Color(0xFFe7192d), Color(0xFFe31952), Color(0xFF7037ce)],
@@ -56,6 +57,7 @@ class OnboardingAppState extends State<InicioApp> {
       end: Alignment.topRight,
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +68,8 @@ class OnboardingAppState extends State<InicioApp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 80,),
+            _buildAnimatedLogo('assets/BancoFinandina/Logo.svg'),
             Expanded(
               child: PageView(
                 controller: _pageController,
@@ -234,10 +238,6 @@ class OnboardingAppState extends State<InicioApp> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 50, top: 10),
-          child: _buildAnimatedLogo(logoUrl),
-        ),
         Column(
           children: [
             Image.asset(imageUrl),
@@ -281,7 +281,7 @@ class OnboardingAppState extends State<InicioApp> {
       alignment: _isLogoSmall ? Alignment.topCenter : Alignment.center,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        height: _isLogoSmall ? 50 : 150, // Cambia el tamaño del logo
+        height: _isLogoSmall ? 50 : 200, // Cambia el tamaño del logo
         child: SvgPicture.asset(logoUrl),
       ),
     );
@@ -294,14 +294,10 @@ class OnboardingAppState extends State<InicioApp> {
       String? imageUrl,
       required String complemento}) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5, top: 10),
-              child: _buildAnimatedLogo(logoUrl),
-            ),
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -324,7 +320,6 @@ class OnboardingAppState extends State<InicioApp> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
             Text(
               subtitle,
               style: const TextStyle(
