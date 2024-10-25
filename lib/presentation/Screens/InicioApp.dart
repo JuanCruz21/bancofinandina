@@ -1,8 +1,10 @@
 // ignore_for_file: file_names
 
+import 'package:bancofinandina/presentation/Providers/InicioAppProvider.dart';
+import 'package:bancofinandina/presentation/Widgets/ButtonsInicio.dart';
+import 'package:bancofinandina/presentation/Widgets/SkipAndNextButtons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class InicioApp extends StatefulWidget {
   const InicioApp({super.key});
@@ -16,59 +18,21 @@ class OnboardingAppState extends State<InicioApp> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   //Cambiado de gradientes dependiendo de la pagina
-  final List<Gradient> _gradients = [
-    const LinearGradient(
-      colors: [Color(0xFFe7192d), Color(0xFFe31952), Color(0xFF7037ce)],
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-    ),
-    const LinearGradient(
-      colors: [Color(0xFFe7192d), Color(0xFFe31952), Color(0xFF7037ce)],
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-    ),
-    const LinearGradient(
-      colors: [Color(0xFFfc4a1a), Color.fromARGB(255, 255, 103, 80)],
-      begin: Alignment.bottomCenter,
-      end: Alignment.bottomLeft,
-    ),
-    const LinearGradient(
-      colors: [Color(0xFFcd34ed), Color(0xFF5b1dd4)],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    const LinearGradient(
-      colors: [
-        Color(0xFFe7192d),
-        Color.fromARGB(255, 251, 51, 107),
-        Color.fromARGB(255, 206, 55, 206)
-      ],
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-    ),
-    const LinearGradient(
-      colors: [Color(0xFFcd34ed), Color(0xFF5b1dd4)],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-    const LinearGradient(
-      colors: [Color(0xFFcd34ed), Color(0xFF5b1dd4)],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final gradientes = InicioAppProvider();
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: _gradients[_currentPage],
+          gradient: gradientes.changeGradient(_currentPage),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 80,),
+            const SizedBox(
+              height: 80,
+            ),
             _buildAnimatedLogo('assets/BancoFinandina/Logo.svg'),
             Expanded(
               child: PageView(
@@ -135,94 +99,9 @@ class OnboardingAppState extends State<InicioApp> {
               ),
             ),
             if (_currentPage < 5)
-              Container(
-                margin: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(29, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(120),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          _pageController.jumpToPage(6);
-                        },
-                        child: const Text(
-                          'Saltar',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                      ),
-                      SmoothPageIndicator(
-                        controller: _pageController,
-                        count: 6, // Cambia al número de páginas que tienes
-                        effect: const ExpandingDotsEffect(
-                          activeDotColor: Colors.white,
-                          dotColor: Colors.white54,
-                          dotHeight: 12,
-                          dotWidth: 12,
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_currentPage < 5) {
-                            _pageController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.linearToEaseOut,
-                            );
-                          } else {
-                            // Acción para continuar después del carrusel
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: const CircleBorder(),
-                          padding: const EdgeInsets.all(14),
-                          backgroundColor: Colors.white, // Fondo blanco
-                        ),
-                        child: const Icon(
-                          Icons.arrow_forward_rounded,
-                          size: 35,
-                          color: Color.fromARGB(
-                              255, 255, 0, 17), // Color del ícono
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
+              SkipAndNextButtons(pageController: _pageController, currentPage: _currentPage)
             else if (_currentPage == 5)
-              Container(
-                margin: const EdgeInsets.all(20),
-                child: Padding(
-                  padding: const EdgeInsets.all(6),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12), // Aumenta el espacio vertical
-                      minimumSize: const Size(double.infinity,
-                          60), // Aumenta el alto mínimo del botón
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(30), // Bordes redondeados
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Libera tu banca',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 120, 64, 251),
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              const ButtonInicio()
           ],
         ),
       ),
