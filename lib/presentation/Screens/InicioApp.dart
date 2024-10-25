@@ -257,7 +257,7 @@ class OnboardingAppState extends State<InicioApp> {
                 subtitle,
                 style: const TextStyle(
                   fontWeight: FontWeight.normal,
-                  color: Colors.white70,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
                 textAlign: TextAlign.center,
