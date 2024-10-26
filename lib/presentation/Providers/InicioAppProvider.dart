@@ -42,9 +42,50 @@ class InicioAppProvider extends ChangeNotifier {
       end: Alignment.topRight,
     ),
   ];
-
+  // Define contenido de cada página para generar widgets dinámicamente
+  final List<Map<String, String>> _pagesContent = [
+    {
+      "complemento": "Con ",
+      "title": "Banco Finandina",
+      "subtitle": "tienes el poder de ser libre",
+      "imageUrl": 'assets/BancoFinandina/Texto.png',
+    },
+    {
+      "title": "Tus productos a la mano",
+      "imageUrl": 'assets/BancoFinandina/Pantalla1.png',
+      "subtitle":
+          "Adminístralos libremente desde cualquier lugar, fácil y rápido.",
+    },
+    {
+      "title": "Paga libremente",
+      "imageUrl": 'assets/BancoFinandina/Pantalla2.png',
+      "subtitle":
+          "Puedes pagar tus productos, recibos y facturas en cualquier momento y lugar.",
+    },
+    {
+      "title": "Envía dinero",
+      "imageUrl": 'assets/BancoFinandina/Pantalla3.png',
+      "subtitle":
+          "Pasa plata libremente y sin costo a cualquier cuenta bancaria o celular en Colombia.",
+    },
+    {
+      "title": "Tu banco donde quieras",
+      "imageUrl": 'assets/BancoFinandina/Pantalla4.png',
+      "subtitle":
+          "La oficina más cercana es tu celular. Libérate de las filas y los trámites largos.",
+    },
+    {
+      "title": "¡Escanea y listo!",
+      "imageUrl": 'assets/BancoFinandina/Pantalla5.png',
+      "subtitle":
+          "Paga en datáfonos con QR y libérate de las tarjetas físicas.",
+    },
+    // Añadir más páginas aquí...
+  ];
   Gradient changeGradient(int index) {
     notifyListeners();
     return gradients[index];
   }
+
+  List<Map<String, String>> get pagesContent => _pagesContent;
 }
