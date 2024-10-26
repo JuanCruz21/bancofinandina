@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:bancofinandina/presentation/Providers/InicioAppProvider.dart';
 import 'package:bancofinandina/presentation/Screens/IntroPage.dart';
 import 'package:bancofinandina/presentation/Screens/Pages.dart';

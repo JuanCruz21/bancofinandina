@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -6,7 +8,8 @@ class SkipAndNextButtons extends StatelessWidget {
     super.key,
     required PageController pageController,
     required int currentPage,
-  }) : _pageController = pageController, _currentPage = currentPage;
+  })  : _pageController = pageController,
+        _currentPage = currentPage;
 
   final PageController _pageController;
   final int _currentPage;
@@ -20,8 +23,7 @@ class SkipAndNextButtons extends StatelessWidget {
         borderRadius: BorderRadius.circular(120),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 20.0, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -63,8 +65,7 @@ class SkipAndNextButtons extends StatelessWidget {
               child: const Icon(
                 Icons.arrow_forward_rounded,
                 size: 35,
-                color: Color.fromARGB(
-                    255, 255, 0, 17), // Color del ícono
+                color: Color.fromARGB(255, 255, 0, 17), // Color del ícono
               ),
             ),
           ],

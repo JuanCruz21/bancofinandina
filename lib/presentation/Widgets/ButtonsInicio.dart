@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,10 @@ class ButtonInicio extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(
                 vertical: 12), // Aumenta el espacio vertical
-            minimumSize: const Size(double.infinity,
-                60), // Aumenta el alto mínimo del botón
+            minimumSize: const Size(
+                double.infinity, 60), // Aumenta el alto mínimo del botón
             shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(30), // Bordes redondeados
+              borderRadius: BorderRadius.circular(30), // Bordes redondeados
             ),
           ),
           child: const Center(
@@ -39,5 +39,3 @@ class ButtonInicio extends StatelessWidget {
     );
   }
 }
-
-
