@@ -31,11 +31,12 @@ class OnboardingAppState extends State<InicioApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 80,
+              height: 70,
             ),
             _buildAnimatedLogo('assets/BancoFinandina/Logo.svg'),
             Expanded(
               child: PageView(
+                physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
                 controller: _pageController,
                 onPageChanged: (index) {
                   setState(() {
@@ -50,6 +51,7 @@ class OnboardingAppState extends State<InicioApp> {
                     subtitle: "tienes el poder de ser libre",
                     imageUrl: 'assets/BancoFinandina/Texto.png',
                   ),
+                  //Paginas con misma estructura
                   _buildPages(
                     logoUrl:
                         'assets/BancoFinandina/Logo.svg', // Cambia por tu imagen
@@ -94,7 +96,6 @@ class OnboardingAppState extends State<InicioApp> {
                     subtitle:
                         "Paga en datáfonos con QR y libérate de las tarjetas físicas.",
                   ),
-                  // Puedes agregar más páginas con diferente contenido aquí
                 ],
               ),
             ),
@@ -119,7 +120,12 @@ class OnboardingAppState extends State<InicioApp> {
       children: [
         Column(
           children: [
-            Image.asset(imageUrl),
+            _currentPage == 3 || _currentPage == 5
+              ? Image.asset(imageUrl)
+              : Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Image.asset(imageUrl),
+                ),
             Text(
               title,
               style: const TextStyle(
@@ -211,7 +217,7 @@ class OnboardingAppState extends State<InicioApp> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 200, right: 40, left: 40),
+          padding: const EdgeInsets.only(top: 150, right: 40, left: 40, bottom: 20),
           child: Image.asset(imageUrl!),
         ),
       ],
